@@ -1,31 +1,33 @@
 import React, { useEffect, useState } from "react";
-import { fetchAllRecipes, fetchRecipesByPage } from "../../services/recipes";
+import { fetchRecipesByPage } from "../../services/recipes";
 import { Pagination } from "../pagination/Pagination";
+import { useFetch } from "../../hooks/useFetch";
+import { Spinner } from "../base/Spinner";
 
 export const Recipes = () => {
-  const [data, setData] = useState({});
   const [page, setPage] = useState(1);
-  useEffect(() => {
-    const fetchRecipes = async () => {
-      const data = await fetchRecipesByPage(page, 10);
+  const [limit] = useState(10);
+  const { loading, data, error } = useFetch(() => fetchRecipesByPage(page, limit), [page]);
 
-      setData(data);
-    };
-
-    fetchRecipes();
-  }, [page]);
   return (
     <>
       <div>
-        {data.recipes &&
-          data.recipes.map((x) => (
-            <div key={x.id}>
-              <img width={50} src={x.image} alt="" />
-              <p>{x.name}</p>
-            </div>
-          ))}
-        {data.recipes && <Pagination page={page} setPage={setPage} limit={10} total={data.total}></Pagination>}
+        {data && !loading
+          ? data.recipes.map((recipe) => (
+              <li key={recipe.id}>
+                <img width={50} src={recipe.image} alt="" />
+                {recipe.name}
+              </li>
+            ))
+          : !loading && "İçerik bulunamadı"}
       </div>
+      {loading && (
+        <div>
+          <Spinner />
+        </div>
+      )}
+      {error && <div>Error...</div>}
+      {data && <Pagination page={page} setPage={setPage} limit={limit} total={data.total} />}
     </>
   );
 };

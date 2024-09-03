@@ -23,7 +23,11 @@ export const Pagination = ({ page, setPage, limit, total }) => {
         Previous Page
       </button>
       {pageArray.map((button, index) => (
-        <button className={index + 1 === page ? "active paginator-btn" : " paginator-btn"} onClick={() => setPage(index + 1)}>
+        <button
+          key={index}
+          className={index + 1 === page ? "active paginator-btn" : " paginator-btn"}
+          onClick={() => setPage(index + 1)}
+        >
           {index + 1}
         </button>
       ))}
