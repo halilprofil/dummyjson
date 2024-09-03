@@ -1,23 +1,11 @@
-import './App.css'
-import { Ingredients } from './components/recipes/Ingredients';
-
-
+import "./App.css";
+import { Recipes } from "./components/recipes/Recipes";
 function App() {
-
-
-
-
- 
-
-
   return (
     <>
-      <Ingredients />
+      <Recipes />
     </>
-  )
+  );
 }
 
-export default App
-
-
-
+export default App;
