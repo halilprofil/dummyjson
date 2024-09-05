@@ -12,60 +12,48 @@ export const Recipes = () => {
   const { loading, data, error } = useFetch(() => fetchRecipesByPage(page, limit), [page]);
   const [filteredData, setFilteredData] = useState([]);
 
-
-
   return (
     <>
       <div className="container">
         <SearchBar data={data} filteredData={filteredData} setFilteredData={setFilteredData} />
         <div className="recipes-container">
           {data && !loading
-
             ? data.recipes.map((x) => (
+                <div className="recipes-item" key={x.id}>
+                  <p>{x.name}</p>
+                  <img src={x.image} alt={x.name} />
 
+                  {/* /* /* acordion start */}
 
+                  <details>
+                    <summary>Malzemeler</summary>
+                    <div className="ingredients">
+                      <h3>Malzemeler</h3>
+                      <ul>{x.ingredients && x.ingredients.map((ingredient, i) => <li key={i}>{ingredient}</li>)}</ul>
+                    </div>
+                  </details>
 
-              <div className="recipes-item" key={x.id}>
-                <p>{x.name}</p>
-                <img  src={x.image} alt={x.name} />
+                  <details>
+                    <summary>Hazırlanış</summary>
+                    <div className="instructions">
+                      <h3>Hazırlanış</h3>
+                      <ol>
+                        {x.instructions &&
+                          x.instructions.map((instruction, i) => (
+                            <li type="number" key={i}>
+                              {instruction}
+                            </li>
+                          ))}
+                      </ol>
+                    </div>
+                  </details>
+                </div>
 
-                {/* /* /* acordion start */}
-
-                <details>
-                  <summary>Malzemeler</summary>
-                  <div className="ingredients">
-                    <h3>Malzemeler</h3>
-                    <ul>
-                      {x.ingredients && x.ingredients.map((ingredient, i) => (
-                        <li key={i}>{ingredient}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </details>
-
-                <details>
-                  <summary>Hazırlanış</summary>
-                  <div className="instructions">
-                    <h3>Hazırlanış</h3>
-                    <ol>
-                      {x.instructions && x.instructions.map((instruction, i) => (
-                        <li type="number" key={i}>{instruction}</li>
-                      ))}
-                    </ol>
-                  </div>
-                </details>
-              </div>
-
-
-
-              /* acordion end */
-
-
-            ))
-          
-          : !loading && "İçerik bulunamadı"}
+                /* acordion end */
+              ))
+            : !loading && "İçerik bulunamadı"}
+        </div>
       </div>
-    </div>
       {loading && (
         <div>
           <Spinner />
