@@ -21,5 +21,5 @@ export function useFetch(callback, dependencies = []) {
       });
   }, dependencies);
 
-  return { data, loading, error };
+  return { data,setLoading, loading, error };
 }
