@@ -1,6 +1,5 @@
 // components/SearchBar/SearchBar.js
 import React from "react";
-import "./searchBar.css"; // Stil dosyasını eklemeyi unutma
 
 export const SearchBar = ({ searchTerm, setSearchTerm }) => {
   return (

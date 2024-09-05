@@ -10,15 +10,20 @@ export const Recipes = () => {
   const [page, setPage] = useState(1);
   const [limit] = useState(10);
   const { loading, data, error } = useFetch(() => fetchRecipesByPage(page, limit), [page]);
+  const [searchTerm, setSearchTerm] = useState("");
   const [filteredData, setFilteredData] = useState([]);
-
+  useEffect(() => {
+    if (data) {
+      setFilteredData(data.recipes.filter((recipes) => recipes.name.toLowerCase().includes(searchTerm.toLowerCase())));
+    }
+  }, [searchTerm, data]);
   return (
     <>
       <div className="container">
-        <SearchBar data={data} filteredData={filteredData} setFilteredData={setFilteredData} />
+        <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         <div className="recipes-container">
-          {data && !loading
-            ? data.recipes.map((x) => (
+          {filteredData.length > 0 && !loading
+            ? filteredData.map((x) => (
                 <div className="recipes-item" key={x.id}>
                   <p>{x.name}</p>
                   <img src={x.image} alt={x.name} />
