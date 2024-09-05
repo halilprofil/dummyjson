@@ -1,35 +1,10 @@
-import React from 'react'
+// components/SearchBar/SearchBar.js
+import React from "react";
 
-export const SearchBar = ({ data, filteredData,setFilteredData,setLoading }) => {
-    
-
-
-    function searchItem(e) {
-setLoading(true)
-        setTimeout(() => {
-            const searchValue = e.target.value.toLowerCase();
-            console.log(e.target.value);
-            
-            const searchedData = data.filter((x) =>
-                x.name.toLowerCase().includes(searchValue)
-            );
-            setFilteredData([...searchedData]);
-
-            if (searchValue === '') {
-                setFilteredData([...data]);
-            }
-            setLoading(false)
-
-        }, 1000)
-
-
-    }
-
-    return (
-        <div className='searchbar-container'>
-          <p><input onChange={(e) => searchItem(e)} type='text' placeholder='arama için ürün ismi giriniz.' /></p>  
-
-
-        </div>
-    )
-}
+export const SearchBar = ({ searchTerm, setSearchTerm }) => {
+  return (
+    <div className="searchContainer">
+      <input type="text" placeholder="Search products..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+    </div>
+  );
+};
