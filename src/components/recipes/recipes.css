@@ -109,4 +109,21 @@
     }
   }
 
+  .recipe-details{
+    margin-inline: auto;
+    display: flex;
+    width: 1200px ;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    img{
+        width: 50%;
+    }
+
+    ul{
+      font-size: 20px;
+    }
+  }
+
   

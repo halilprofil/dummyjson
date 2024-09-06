@@ -85,3 +85,21 @@ h6 {
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
 }
+
+.product-details{
+    margin-top: -100px !important;
+    margin-inline: auto;
+    display: flex;
+    width: 100% ;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    img{
+        width: 50%;
+    }
+
+    ul{
+      font-size: 20px;
+    }
+ 
+}
